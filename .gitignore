@@ -1,6 +1,8 @@
 auth_state.json
 *.db
-*.html
+debug/*.html
 .venv
 .env
 __pycache__/
+web/node_modules/
+web/dist/

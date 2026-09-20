@@ -1,0 +1,11 @@
+{
+  "name": "ourshelf-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "deploy": "gh-pages -d dist -r https://github.com/anum-kyra-officehours/ourshelf.git"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
