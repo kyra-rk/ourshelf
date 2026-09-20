@@ -12,7 +12,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-STORAGE_STATE_PATH = Path("auth_state.json")
+STORAGE_STATE_PATH = Path(__file__).parent.parent / "auth_state.json"
 
 
 def main():
@@ -48,8 +48,9 @@ def main():
         user_links = page.query_selector_all('a[rel="acquaintance"]')
         print(f"Found {len(user_links)} a[rel='acquaintance'] elements")
 
-        page.screenshot(path="debug_friends_screenshot.png", full_page=True)
-        Path("debug_friends_page.html").write_text(page.content(), encoding="utf-8")
+        here = Path(__file__).parent
+        page.screenshot(path=str(here / "debug_friends_screenshot.png"), full_page=True)
+        (here / "debug_friends_page.html").write_text(page.content(), encoding="utf-8")
 
         browser.close()
 

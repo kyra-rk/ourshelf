@@ -79,10 +79,21 @@ Base repo
 
 ---
 
+## Color Palette
+
+| Swatch | Name | Hex |
+|---|---|---|
+| ![#452928](https://placehold.co/20x20/452928/452928.png) | Deep Wine | `#452928` |
+| ![#74362d](https://placehold.co/20x20/74362d/74362d.png) | Burgundy | `#74362d` |
+| ![#a49250](https://placehold.co/20x20/a49250/a49250.png) | Khaki | `#a49250` |
+| ![#9dbcd1](https://placehold.co/20x20/9dbcd1/9dbcd1.png) | Pastel Blue Grey | `#9dbcd1` |
+
+---
+
 ## Open Questions
 
-- [ ] How do we handle Goodreads scraping at scale / rate limits?
-- [ ] Do users need to provide their own cookies, or do we handle login?
+- [x] How do we handle rate limits? — 2s delay between shelf pages, 3s between book detail pages, 8s between friends; configurable via env vars
+- [x] Do users need to provide their own cookies? — Yes: one-time interactive login via `python src/goodreads_scraper.py login`, session saved to `auth_state.json`
 - [ ] What does the "book club" recommendation algorithm look like?
 - [ ] Should the embeddable widget be a separate package?
 - [ ] Centrally hosted — what's the deployment target? (Vercel, Railway, etc.)
