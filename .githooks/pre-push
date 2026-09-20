@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#
+# pre-push — auto-deploys the ourshelf web app to GitHub Pages whenever a
+# push includes changes to web/dist/, using the gh-pages package
+# (npm run deploy in web/package.json).
+#
+# This file is version-controlled in .githooks/. To activate it:
+#   git config core.hooksPath .githooks
+#
+# Or install manually:
+#   cp .githooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+ZERO="0000000000000000000000000000000000000000"
+WEB_CHANGED=false
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [ "$local_sha" = "$ZERO" ] && continue  # deleting a branch — skip
+
+    if [ "$remote_sha" = "$ZERO" ]; then
+        range="$local_sha"
+    else
+        range="$remote_sha..$local_sha"
+    fi
+
+    if git diff --name-only "$range" -- web/dist/ | grep -q .; then
+        WEB_CHANGED=true
+    fi
+done
+
+if [ "$WEB_CHANGED" = true ]; then
+    echo "pre-push: web/dist/ changed — deploying to gh-pages..."
+    bash "$REPO_ROOT/web/deploy.sh"
+fi

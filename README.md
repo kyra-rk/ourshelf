@@ -100,22 +100,47 @@ The scraper also reads `.env` automatically, so env vars apply whether you run v
 ```
 ourshelf/
 ├── src/
-│   └── goodreads_scraper.py   # All scraping logic + CLI
+│   └── goodreads_scraper.py     # All scraping logic + CLI
+├── web/
+│   ├── dist/                    # Built web app (gitignored — deploy via npm run deploy)
+│   ├── package.json             # gh-pages deploy script
+│   └── package-lock.json
 ├── debug/
-│   ├── debug_shelf.py         # Diagnose shelf scraping issues
-│   └── debug_friends.py       # Diagnose friend list scraping issues
+│   ├── debug_shelf.py           # Diagnose shelf scraping issues
+│   └── debug_friends.py         # Diagnose friend list scraping issues
 ├── data/
-│   ├── goodreads.db           # Local SQLite database (gitignored)
+│   ├── goodreads.db             # Local SQLite database (gitignored)
 │   └── book_details_cache.json  # Shared book detail cache (committed, no PII)
 ├── docs/
-│   ├── brainstorm.md          # Project concept and design decisions
-│   ├── schema.md              # Database schema with ER diagram
-│   └── handoff/               # Session handoff notes
-├── pyproject.toml             # Python project + dependencies
-├── uv.lock                    # Locked dependency versions
-├── run.sh                     # Full pipeline runner
-└── .env                       # Local config (gitignored)
+│   ├── brainstorm.md            # Project concept and design decisions
+│   ├── schema.md                # Database schema with ER diagram
+│   └── handoff/                 # Session handoff notes
+├── .githooks/
+│   └── pre-push                 # Auto-deploys web/dist to gh-pages on push
+├── pyproject.toml               # Python project + dependencies
+├── uv.lock                      # Locked dependency versions
+├── run.sh                       # Full scraper pipeline
+├── clean.sh                     # Deletes local runtime files (auth, db, debug html)
+└── .env                         # Local config (gitignored)
 ```
+
+---
+
+## GitHub Pages
+
+The site is served from the `gh-pages` branch at the org repo. The built web app lives in `web/dist/` (gitignored — not committed to `main`).
+
+**To deploy manually:**
+```bash
+bash web/deploy.sh
+```
+
+**Auto-deploy on push:** the `pre-push` hook in `.githooks/` detects changes to `web/dist/` and runs `web/deploy.sh` automatically. The hook is activated via `git config core.hooksPath .githooks` (already set). New contributors need to run this once after cloning:
+```bash
+git config core.hooksPath .githooks
+```
+
+The deploy script pushes `web/dist/` to `gh-pages` from an isolated temp git repo, so the project `.gitignore` never interferes with `index.html` being included.
 
 ---
 
