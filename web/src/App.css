@@ -1,0 +1,326 @@
+/* ---------- Genres page ---------- */
+/* Full-bleed, full-height tab columns — see brainstorming/genre_folders.jpeg */
+
+.genres-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page-header {
+  text-align: center;
+  flex-shrink: 0;
+  padding: 18px 24px 14px;
+  border-bottom: 2px solid var(--deep-wine);
+}
+
+.page-header h1 {
+  font-size: 28px;
+  letter-spacing: 0.03em;
+  display: inline;
+}
+
+.page-header .subtitle {
+  display: inline;
+  margin-left: 12px;
+  color: var(--burgundy);
+  font-style: italic;
+  font-size: 15px;
+}
+
+.folder-row {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.folder-column {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 110px;
+  height: 100%;
+  background: var(--folder-color);
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 10px;
+  cursor: pointer;
+  border-right: 2px solid rgba(0, 0, 0, 0.18);
+  transition: flex-grow 0.25s ease, filter 0.2s ease;
+}
+
+.folder-column:last-child {
+  border-right: none;
+}
+
+.folder-column:hover,
+.folder-column:focus-visible {
+  flex-grow: 2.2;
+  filter: brightness(1.08);
+}
+
+.folder-code {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.folder-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.folder-count {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* ---------- Shelf page ---------- */
+
+.shelf-page {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.shelf-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.shelf-header h1 {
+  font-size: 34px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--khaki);
+  color: var(--parchment);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+.back-button:hover {
+  background: var(--burgundy);
+}
+
+.shelf-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 24px 20px 16px;
+  overflow-x: auto;
+  border-bottom: 10px solid var(--khaki);
+  border-radius: 2px;
+  min-height: 320px;
+}
+
+.book-spine {
+  flex-shrink: 0;
+  background: var(--spine-color);
+  border: none;
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset -4px 0 8px rgba(0, 0, 0, 0.15), 2px 0 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 0;
+  gap: 10px;
+  transition: transform 0.12s ease;
+}
+
+.book-spine:hover,
+.book-spine:focus-visible {
+  transform: translateY(-10px);
+}
+
+.spine-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  max-height: 72%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spine-author {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 11px;
+  opacity: 0.85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty-shelf {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+/* ---------- Book detail modal ---------- */
+
+.book-detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(69, 41, 40, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 10;
+}
+
+.book-detail-card {
+  position: relative;
+  background: var(--parchment);
+  border-radius: 10px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.detail-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--deep-wine);
+  cursor: pointer;
+}
+
+.book-detail-card h2 {
+  font-size: 26px;
+  padding-right: 28px;
+}
+
+.detail-author {
+  margin-top: 4px;
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+.detail-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.genre-chip {
+  background: var(--pastel-blue-grey);
+  color: var(--deep-wine);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.detail-pages {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--burgundy);
+}
+
+.detail-readers {
+  margin-top: 16px;
+}
+
+.detail-readers-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--burgundy);
+  margin-bottom: 6px;
+}
+
+.detail-readers-empty {
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.reader-chip {
+  background: var(--khaki);
+  color: var(--parchment);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.detail-description {
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.detail-description--empty {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .page-header .subtitle {
+    display: block;
+    margin-left: 0;
+  }
+
+  .folder-column {
+    min-width: 76px;
+  }
+
+  .folder-title {
+    font-size: 17px;
+  }
+
+  .shelf-header h1 {
+    font-size: 24px;
+  }
+}

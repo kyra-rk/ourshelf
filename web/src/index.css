@@ -1,0 +1,44 @@
+:root {
+  --deep-wine: #452928;
+  --burgundy: #74362d;
+  --khaki: #a49250;
+  --pastel-blue-grey: #9dbcd1;
+  --parchment: #f3ede3;
+  --parchment-dark: #e7ddcb;
+
+  --sans: 'Georgia', 'Iowan Old Style', serif;
+
+  font: 18px/145% var(--sans);
+  color: var(--deep-wine);
+  background: var(--parchment);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--parchment);
+}
+
+#root {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+  color: var(--deep-wine);
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
