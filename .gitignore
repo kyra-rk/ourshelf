@@ -1,0 +1,6 @@
+auth_state.json
+*.db
+*.html
+.venv
+.env
+__pycache__/
