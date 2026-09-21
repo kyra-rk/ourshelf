@@ -38,8 +38,8 @@ fi
 
 echo "Syncing dependencies..."
 cd "$SCRIPT_DIR"
-uv sync --quiet
-uv run playwright install chromium --quiet
+uv -q sync
+uv -q run playwright install chromium
 
 if [ ! -f "$SCRIPT_DIR/auth_state.json" ]; then
     echo

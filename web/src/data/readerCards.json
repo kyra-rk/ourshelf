@@ -1,0 +1,14 @@
+{
+  "kyra-krishna": {
+    "favGenre": "Sci-Fi / Fantasy",
+    "medium": "Kindle Warrior",
+    "skimRate": "20%",
+    "readingSpeed": "Depends on the book"
+  },
+  "anum": {
+    "favGenre": "Thriller",
+    "medium": "Classic Paperback",
+    "skimRate": "60%",
+    "readingSpeed": "700 WPM"
+  }
+}

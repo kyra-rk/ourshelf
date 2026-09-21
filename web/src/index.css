@@ -7,6 +7,7 @@
   --parchment-dark: #e7ddcb;
 
   --sans: 'Georgia', 'Iowan Old Style', serif;
+  --display: 'Forum', 'Georgia', serif;
 
   font: 18px/145% var(--sans);
   color: var(--deep-wine);
@@ -34,6 +35,7 @@ body {
 
 h1,
 h2 {
+  font-family: var(--display);
   font-weight: 600;
   color: var(--deep-wine);
   margin: 0;

@@ -12,7 +12,7 @@ A community bookshelf — scrapes Goodreads data for you and your friends and tu
 2. The scraper pulls your shelves (read, currently reading, want to read) and your friends' public shelves
 3. All books are deduplicated into a shared SQLite database
 4. A second pass enriches each unique book with cover art, description, genres, page count, and top quotes from the book's individual Goodreads page
-5. The resulting database is the foundation for the ourshelf UI
+5. `scripts/export_books.py` exports the database into static JSON (`web/src/data/books.json`, `people.json`, `stats.json`) that the ourshelf web UI reads directly — see `web/README.md` for the pages and what each file contains
 
 ---
 
@@ -101,8 +101,12 @@ The scraper also reads `.env` automatically, so env vars apply whether you run v
 ourshelf/
 ├── src/
 │   └── goodreads_scraper.py     # All scraping logic + CLI
+├── scripts/
+│   └── export_books.py          # Exports goodreads.db -> web/src/data/*.json
 ├── web/
 │   ├── dist/                    # Built web app (gitignored — deploy via npm run deploy)
+│   ├── src/data/                # Generated books.json/people.json/stats.json
+│   │                             # + hand-authored readerCards.json (see web/README.md)
 │   ├── package.json             # gh-pages deploy script
 │   └── package-lock.json
 ├── debug/

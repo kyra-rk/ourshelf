@@ -12,22 +12,31 @@ function heightFor(id) {
   return 240 + (Math.abs(hash) % 60) // 240–300px
 }
 
-// Spine thickness follows page count, like a real book.
-function widthFor(pageCount) {
-  if (!pageCount) return 40
-  return Math.min(70, Math.max(32, Math.round(pageCount / 12)))
+// Title text is vertical (writing-mode: vertical-rl), so a long title wraps
+// into extra columns rather than getting truncated (see .spine-title) —
+// the spine has to be wide enough to hold all of them, or the wrapped
+// columns spill into the neighboring spine. Estimate columns needed from
+// character count and the vertical room a column actually has.
+function widthFor(title, author, height) {
+  const titleAreaHeight = height * 0.6
+  const authorAreaHeight = height * 0.26
+  const titleColumns = Math.max(1, Math.ceil((title.length * 15) / titleAreaHeight))
+  const authorColumns = Math.max(1, Math.ceil((author.length * 12) / authorAreaHeight))
+  const width = Math.max(titleColumns * 22, authorColumns * 18) + 16
+  return Math.min(150, Math.max(46, Math.round(width)))
 }
 
 function BookSpine({ book, onSelect }) {
   const color = spineColorFor(book.id)
   const textColor = textColorFor(color)
   const height = heightFor(book.id)
-  const width = widthFor(book.pageCount)
+  const width = widthFor(book.title, book.author, height)
+  const isTbr = book.status === 'tbr'
 
   return (
     <button
       type="button"
-      className="book-spine"
+      className={`book-spine${isTbr ? ' book-spine--tbr' : ''}`}
       style={{
         '--spine-color': color,
         color: textColor,
@@ -36,6 +45,7 @@ function BookSpine({ book, onSelect }) {
       }}
       onClick={() => onSelect(book)}
     >
+      {isTbr ? <span className="spine-tbr-flag">TBR</span> : null}
       <span className="spine-title">{book.title}</span>
       <span className="spine-author">{book.author}</span>
     </button>

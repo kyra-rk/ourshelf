@@ -1,0 +1,52 @@
+{
+  "totalPeople": 2,
+  "totalUniqueBooksRead": 477,
+  "totalReadInstances": 494,
+  "totalUniqueBooksTbr": 474,
+  "overlapBooks": 17,
+  "overlapPercent": 3.6,
+  "topSharedBooks": [
+    {
+      "id": "40916679",
+      "title": "A Good Girl's Guide to Murder (A Good Girl's Guide to Murder, #1)",
+      "author": "Holly Jackson",
+      "readByCount": 2
+    },
+    {
+      "id": "32758901",
+      "title": "All Systems Red (The Murderbot Diaries, #1)",
+      "author": "Martha Wells",
+      "readByCount": 2
+    },
+    {
+      "id": "36223860",
+      "title": "Artificial Condition (The Murderbot Diaries, #2)",
+      "author": "Martha Wells",
+      "readByCount": 2
+    },
+    {
+      "id": "57945316",
+      "title": "Babel",
+      "author": "R.F. Kuang",
+      "readByCount": 2
+    },
+    {
+      "id": "58690308",
+      "title": "Book Lovers",
+      "author": "Emily Henry",
+      "readByCount": 2
+    }
+  ],
+  "perPerson": [
+    {
+      "name": "Kyra Krishna",
+      "readCount": 403,
+      "tbrCount": 421
+    },
+    {
+      "name": "Anum",
+      "readCount": 91,
+      "tbrCount": 56
+    }
+  ]
+}
