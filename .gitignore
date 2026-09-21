@@ -1,8 +1,9 @@
+.DS_Store
 auth_state.json
 *.db
 debug/*.html
 .venv
 .env
 __pycache__/
-web/node_modules
-web/dist
+web/node_modules/
+web/dist/

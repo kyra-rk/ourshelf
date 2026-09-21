@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
 #
 # pre-push — auto-deploys the ourshelf web app to GitHub Pages whenever a
-# push includes changes to web/ (index.html, src, public, package.json),
-# using the gh-pages branch deploy method from
-# https://github.com/tschaub/gh-pages (already wired up as `npm run deploy`
-# in web/package.json, i.e. `gh-pages -d dist`).
+# push includes changes to web/ source files (index.html, src/, public/,
+# package.json). Runs `npm run build` then `bash web/deploy.sh`.
 #
-# Git doesn't track .git/hooks/, so this file lives here under version
-# control. To install it:
-#   cp .githooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
-# or point git at this directory directly for every hook:
+# This file is version-controlled in .githooks/. To activate it:
 #   git config core.hooksPath .githooks
+#
+# Or install manually:
+#   cp .githooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
 
 set -euo pipefail
 
@@ -22,7 +20,7 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     [ "$local_sha" = "$ZERO" ] && continue  # deleting a branch — nothing to check
 
     if [ "$remote_sha" = "$ZERO" ]; then
-        range="$local_sha"           # new branch: check the whole history being pushed
+        range="$local_sha"
     else
         range="$remote_sha..$local_sha"
     fi
@@ -34,5 +32,6 @@ done
 
 if [ "$WEB_CHANGED" = true ]; then
     echo "pre-push: web/ changed — building and deploying to gh-pages..."
-    (cd "$REPO_ROOT/web" && npm run build && npm run deploy)
+    (cd "$REPO_ROOT/web" && npm run build)
+    bash "$REPO_ROOT/web/deploy.sh"
 fi
